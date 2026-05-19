@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        MainTabView()
     }
 }
 
 #Preview {
     ContentView()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environmentObject(TransactionViewModel())
+        .environmentObject(BudgetViewModel())
+        .environmentObject(AppSettings.shared)
 }
